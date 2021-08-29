@@ -19,39 +19,51 @@ const useTopStories = () => {
 };
 
 const useTopStoriesInfo = (topStories) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [topStoriesInfo, setTopStoriesInfo] = useState([]);
 
   useEffect(() => {
     const fetchTopStories = async () => {
-      const responses = await Promise.all(
-        topStories.map((topStory) =>
-          fetch(`${HACKER_NEWS_BASE_URL}/item/${topStory}.json`),
-        ),
-      );
+      try {
+        setIsLoading(true);
 
-      for (const response of responses) {
-        const data = await response.json();
-        setTopStoriesInfo((topStoriesInfo) => [
-          ...topStoriesInfo,
-          {
-            key: `${data.id}-${data.title}`,
-            title: data.title,
-            author: data.by,
-            url: data.url,
-          },
-        ]);
+        const responses = await Promise.all(
+          topStories.map((topStory) =>
+            fetch(`${HACKER_NEWS_BASE_URL}/item/${topStory}.json`),
+          ),
+        );
+
+        for (const response of responses) {
+          const data = await response.json();
+          setTopStoriesInfo((topStoriesInfo) => [
+            ...topStoriesInfo,
+            {
+              key: `${data.id}-${data.title}`,
+              title: data.title,
+              author: data.by,
+              url: data.url,
+            },
+          ]);
+        }
+      } catch (error) {
+        setHasError(true);
       }
+
+      setIsLoading(false);
     };
 
     fetchTopStories();
   }, [topStories]);
 
-  return { topStoriesInfo };
+  return { topStoriesInfo, isLoading, hasError };
 };
 
 export default function Home() {
   const { topStories } = useTopStories();
-  const { topStoriesInfo } = useTopStoriesInfo(topStories);
+  const { topStoriesInfo, isLoading } = useTopStoriesInfo(topStories);
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <ul>
