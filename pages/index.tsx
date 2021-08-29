@@ -1,5 +1,6 @@
 import { useTopStories } from './HackerNews/hooks/useTopStories';
 import { useTopStoriesInfo } from './HackerNews/hooks/useTopStoriesInfo';
+import { TopStoryInfo } from './HackerNews/types/TopStoryInfo';
 
 export default function Home() {
   const { topStories } = useTopStories();
@@ -9,7 +10,7 @@ export default function Home() {
 
   return (
     <ul>
-      {topStoriesInfo.map((story) => (
+      {topStoriesInfo.map((story: TopStoryInfo) => (
         <li key={story.key}>
           <p>{story.title}</p>
           <p>{story.author}</p>
