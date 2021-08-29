@@ -31,7 +31,15 @@ const useTopStoriesInfo = (topStories) => {
 
       for (const response of responses) {
         const data = await response.json();
-        setTopStoriesInfo((topStoriesInfo) => [...topStoriesInfo, data]);
+        setTopStoriesInfo((topStoriesInfo) => [
+          ...topStoriesInfo,
+          {
+            key: `${data.id}-${data.title}`,
+            title: data.title,
+            author: data.by,
+            url: data.url,
+          },
+        ]);
       }
     };
 
@@ -44,7 +52,18 @@ const useTopStoriesInfo = (topStories) => {
 export default function Home() {
   const { topStories } = useTopStories();
   const { topStoriesInfo } = useTopStoriesInfo(topStories);
-  console.log('topStoriesInfo', topStoriesInfo);
 
-  return <h1>Home</h1>;
+  return (
+    <ul>
+      {topStoriesInfo.map((story) => (
+        <li key={story.key}>
+          <p>{story.title}</p>
+          <p>{story.author}</p>
+          <a href={story.url} target="_blank" rel="noreferrer">
+            {'>'}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
 }
