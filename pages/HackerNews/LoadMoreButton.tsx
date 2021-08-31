@@ -3,9 +3,10 @@ import { LoadMoreButtonPropTypes } from './types/LoadMoreButtonPropTypes';
 export const LoadMoreButton = ({
   isLoading,
   fetchNextPage,
-}: LoadMoreButtonPropTypes) =>
-  isLoading ? (
-    <p>Loading...</p>
-  ) : (
+  canLoadMore,
+}: LoadMoreButtonPropTypes) => {
+  if (isLoading) return <p>Loading...</p>;
+  return canLoadMore ? (
     <button onClick={fetchNextPage}>Load more</button>
-  );
+  ) : null;
+};

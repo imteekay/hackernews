@@ -10,14 +10,19 @@ export const useTopStoriesInfo = (
   isLoading: boolean;
   hasError: boolean;
   fetchNextPage: () => void;
+  canLoadMore: boolean;
 } => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [page, setPage] = useState(0);
   const [topStoriesInfo, setTopStoriesInfo] = useState<TopStoryInfo[]>([]);
 
+  const initialPageIndex = page * 10;
+  const endPageIndex = (page + 1) * 10;
+  const canLoadMore = endPageIndex < topStories.length;
+
   useEffect(() => {
-    const stories = topStories.slice(page * 10, (page + 1) * 10);
+    const stories = topStories.slice(initialPageIndex, endPageIndex);
 
     const fetchTopStories = async () => {
       try {
@@ -50,11 +55,11 @@ export const useTopStoriesInfo = (
     };
 
     fetchTopStories();
-  }, [topStories, page]);
+  }, [topStories, initialPageIndex, endPageIndex]);
 
   const fetchNextPage = () => {
     setPage((currentPage) => currentPage + 1);
   };
 
-  return { topStoriesInfo, isLoading, hasError, fetchNextPage };
+  return { topStoriesInfo, isLoading, hasError, fetchNextPage, canLoadMore };
 };
