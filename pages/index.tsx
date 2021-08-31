@@ -1,12 +1,14 @@
 import { useTopStories } from './HackerNews/hooks/useTopStories';
 import { useTopStoriesInfo } from './HackerNews/hooks/useTopStoriesInfo';
 import { TopStoryInfo } from './HackerNews/types/TopStoryInfo';
+import { LoadMoreButton } from './HackerNews/LoadMoreButton';
 
 export default function Home() {
-  const { topStories } = useTopStories();
-  const { topStoriesInfo, isLoading } = useTopStoriesInfo(topStories);
+  const { topStories, loadingStories } = useTopStories();
+  const { topStoriesInfo, isLoading, fetchNextPage } =
+    useTopStoriesInfo(topStories);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (loadingStories) return <p>Loading...</p>;
 
   return (
     <ul>
@@ -19,6 +21,7 @@ export default function Home() {
           </a>
         </li>
       ))}
+      <LoadMoreButton isLoading={isLoading} fetchNextPage={fetchNextPage} />
     </ul>
   );
 }
