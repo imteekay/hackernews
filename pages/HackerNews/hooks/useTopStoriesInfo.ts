@@ -9,18 +9,23 @@ export const useTopStoriesInfo = (
   topStoriesInfo: TopStoryInfo[];
   isLoading: boolean;
   hasError: boolean;
+  fetchNextPage: () => void;
 } => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [page, setPage] = useState(0);
   const [topStoriesInfo, setTopStoriesInfo] = useState<TopStoryInfo[]>([]);
 
   useEffect(() => {
+    const stories = topStories.slice(page * 10, (page + 1) * 10);
+
     const fetchTopStories = async () => {
       try {
         setIsLoading(true);
+        setHasError(false);
 
         const responses = await Promise.all(
-          topStories.map((topStory) =>
+          stories.map((topStory) =>
             fetch(`${HACKER_NEWS_BASE_URL}/item/${topStory}.json`),
           ),
         );
@@ -45,7 +50,11 @@ export const useTopStoriesInfo = (
     };
 
     fetchTopStories();
-  }, [topStories]);
+  }, [topStories, page]);
 
-  return { topStoriesInfo, isLoading, hasError };
+  const fetchNextPage = () => {
+    setPage((currentPage) => currentPage + 1);
+  };
+
+  return { topStoriesInfo, isLoading, hasError, fetchNextPage };
 };
