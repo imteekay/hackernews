@@ -4,7 +4,7 @@ import { StoriesList } from './HackerNews/StoriesList';
 import { LoadMoreButton } from './HackerNews/LoadMoreButton';
 
 const containerStyle = {
-  marginBottom: '24px',
+  margin: '24px',
 };
 
 export default function Home() {
@@ -16,6 +16,7 @@ export default function Home() {
 
   return (
     <div style={containerStyle}>
+      <h1>Hackernews</h1>
       <StoriesList topStoriesInfo={topStoriesInfo} />
       <LoadMoreButton
         isLoading={isLoading}

@@ -8,7 +8,6 @@ const storiesListStyle = {
   borderRight: '1px solid #eaeaea',
   borderRadius: '6px',
   padding: 0,
-  margin: '24px',
   boxShadow: '2px 2px 9px #eaeaea',
 };
 
