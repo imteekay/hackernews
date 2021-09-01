@@ -3,6 +3,10 @@ import { useTopStoriesInfo } from './HackerNews/hooks/useTopStoriesInfo';
 import { StoriesList } from './HackerNews/StoriesList';
 import { LoadMoreButton } from './HackerNews/LoadMoreButton';
 
+const containerStyle = {
+  marginBottom: '24px',
+};
+
 export default function Home() {
   const { topStories, loadingStories } = useTopStories();
   const { topStoriesInfo, isLoading, fetchNextPage, canLoadMore } =
@@ -11,13 +15,13 @@ export default function Home() {
   if (loadingStories) return <p>Loading...</p>;
 
   return (
-    <>
+    <div style={containerStyle}>
       <StoriesList topStoriesInfo={topStoriesInfo} />
       <LoadMoreButton
         isLoading={isLoading}
         fetchNextPage={fetchNextPage}
         canLoadMore={canLoadMore}
       />
-    </>
+    </div>
   );
 }
