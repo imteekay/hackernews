@@ -44,6 +44,8 @@ export const useTopStoriesInfo = (
               title: data.title,
               author: data.by,
               url: data.url,
+              commentsCount: data.kids?.length ?? 0,
+              points: data.score,
             },
           ]);
         }

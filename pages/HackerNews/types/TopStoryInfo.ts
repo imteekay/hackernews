@@ -3,4 +3,6 @@ export type TopStoryInfo = {
   title: string;
   author: string;
   url: string;
+  commentsCount: number;
+  points: number;
 };

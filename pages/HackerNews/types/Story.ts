@@ -3,4 +3,6 @@ export type StoryPropTypes = {
   author: string;
   title: string;
   url: string;
+  commentsCount: number;
+  points: number;
 };
