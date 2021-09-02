@@ -5,7 +5,7 @@ const itemStyle = {
   alignItems: 'center',
   borderBottom: '1px solid #eaeaea',
   padding: '24px 14px',
-  overflowX: 'overlay' as 'overlay',
+  'overflow-x': 'overlay' as 'overlay',
 };
 
 export const Item: FunctionComponent = ({ children }) => (
