@@ -1,4 +1,5 @@
 import { LoadMoreButtonPropTypes } from './types/LoadMoreButtonPropTypes';
+import { LoadingSpinner } from './components/LoadingSpinner';
 
 const wrapperStyle = {
   textAlign: 'center' as 'center',
@@ -16,7 +17,8 @@ export const LoadMoreButton = ({
   fetchNextPage,
   canLoadMore,
 }: LoadMoreButtonPropTypes) => {
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
+
   return canLoadMore ? (
     <div style={wrapperStyle}>
       <a onClick={fetchNextPage} style={loadMoreLinkStyle}>

@@ -3,6 +3,8 @@ import { HACKER_NEWS_BASE_URL } from '../constants';
 import { TopStory } from '../types/TopStory';
 import { TopStoryInfo } from '../types/TopStoryInfo';
 
+const PER_PAGE = 6;
+
 export const useTopStoriesInfo = (
   topStories: TopStory[],
 ): {
@@ -17,8 +19,8 @@ export const useTopStoriesInfo = (
   const [page, setPage] = useState(0);
   const [topStoriesInfo, setTopStoriesInfo] = useState<TopStoryInfo[]>([]);
 
-  const initialPageIndex = page * 10;
-  const endPageIndex = (page + 1) * 10;
+  const initialPageIndex = page * PER_PAGE;
+  const endPageIndex = (page + 1) * PER_PAGE;
   const canLoadMore = endPageIndex < topStories.length;
 
   useEffect(() => {
