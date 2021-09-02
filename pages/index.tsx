@@ -8,11 +8,9 @@ const containerStyle = {
 };
 
 export default function Home() {
-  const { topStories, loadingStories } = useTopStories();
+  const { topStories } = useTopStories();
   const { topStoriesInfo, isLoading, fetchNextPage, canLoadMore } =
     useTopStoriesInfo(topStories);
-
-  if (loadingStories) return <p>Loading...</p>;
 
   return (
     <div style={containerStyle}>
