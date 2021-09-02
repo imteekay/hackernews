@@ -1,7 +1,7 @@
-import { useTopStories } from './HackerNews/hooks/useTopStories';
-import { useTopStoriesInfo } from './HackerNews/hooks/useTopStoriesInfo';
-import { StoriesList } from './HackerNews/StoriesList';
-import { LoadMoreButton } from './HackerNews/LoadMoreButton';
+import { useTopStories } from 'HackerNews/hooks/useTopStories';
+import { useTopStoriesInfo } from 'HackerNews/hooks/useTopStoriesInfo';
+import { StoriesList } from 'HackerNews/StoriesList';
+import { LoadMoreButton } from 'HackerNews/LoadMoreButton';
 
 const containerStyle = {
   margin: '24px',
