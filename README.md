@@ -9,6 +9,7 @@ yarn dev
 ## Tech Stack
 
 - NextJS
+- JavaScript
 - TypeScript
 - Hooks
 - Prettier
